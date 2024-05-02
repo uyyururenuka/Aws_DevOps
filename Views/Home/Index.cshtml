@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<body class="bg-dark text-white">
+    <div class="text-center bg-dark text-white">
+        <h1 class="display-4">Hello World! 👋</h1>
+        <p id="CurrentTime">
+            @ViewBag.Message
+        </p>
+    </div>
+    <script>
+        // Function to update the current time
+        function updateCurrentTime() {
+            var currentTime = new Date().toLocaleTimeString();
+            document.getElementById("currentTime").innerText = "The current server time is: " + currentTime;
+        }
+
+        // Update the time every second
+        setInterval(updateCurrentTime, 1000);
+
+        // Update the time immediately after the page loads
+        updateCurrentTime();
+    </script>
+</body>
