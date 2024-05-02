@@ -41,23 +41,12 @@ namespace Helloworldwebapp
                         });
                     });
                 })
-                //.ConfigureLogging(logging =>
-                //{
-                //    logging.ClearProviders(); // Clear any previously configured providers
-                //    logging.AddConsole(); // Add console logging
-                //});
+                
                 .ConfigureLogging(logging =>
                 {
                     logging.ClearProviders(); // Clear any previously configured providers
                     logging.AddConsole(); // Add console logging
                 });
 
-
-        //.ConfigureLogging(logging =>
-        //{
-        //    logging.ClearProviders(); // Clear any previously configured providers
-        //    logging.AddConsole(); // Add console logging
-        //    logging.AddFile("logs/myapp.log"); // Add file logging
-        //});
     }
 }
