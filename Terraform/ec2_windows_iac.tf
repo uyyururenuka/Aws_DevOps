@@ -7,9 +7,9 @@ terraform {
   }
 }
 provider "aws" {
-  region     = "ap-south-1"
-  access_key = "AKIAYS2NQQHLH5HSXY6P"
-  secret_key = "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"
+  region     = "AWS_REGION"
+  access_key = "AWS_ACCESS_KEY"
+  secret_key = "AWS_SECRET_KEY"
 }
 
 
@@ -53,8 +53,7 @@ resource "aws_instance" "web" {
 #creating key pair
 resource "aws_key_pair" "deployer" {
   key_name   = "deployer-key"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCwiSWpE3tf0QcuNh571CABBThPJsOXLND5W/PeRixSRx8wglEC6NuBPMAiknUI812h+ZMU2w5YtThmeUIiu4HjP9nNBVN1kJ4gk2dL3eCA5stnajsEVK/UCGLPEzH0QPoZG9TWzTIZlu8U1JpA373IIBUGVq9y0aA2XqPTVYsU/oWAc+uAWUdM3vDqa/aGsnPf6tUs6m+cFmWWf7l6ZxxTDP6+zFK5QKTGiRdW4hL87mCUwrZTUS9B3wWXvTcxWn5WUDrqTdMbdljD1qa2ThbTL2XjIPSKgyXk6NCQvm9cTQN+RFv6vCgM8ZMaphBnCOHBW7yuqZ8Gc3kOikbi2Wob"
-}
+  public_key = "yout public key"
 
 resource "aws_security_group" "web_sg" {
   vpc_id = aws_vpc.main.id
