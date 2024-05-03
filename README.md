@@ -112,6 +112,76 @@ This manual guides how to deploy a **Hello World** web application built with AS
 
 7. **Verify Provisioned Resources**:
    - After Terraform has finished applying the configuration, verify that the EC2 instance was successfully launched by checking the AWS Management Console.
+### Step 4: Connect Your Windows EC2 Instance to Remote Desktop Protocol (RDP) Client
+
+#### Prerequisites:
+- RDP client installed on your local machine (e.g., Remote Desktop Connection for Windows, Microsoft Remote Desktop for macOS).
+
+#### Instructions:
+1. **Retrieve EC2 Instance Public IP Address or DNS Name**:
+   - Navigate to the EC2 dashboard and locate your Windows EC2 instance.
+   - Note down the Public IPv4 address or Public DNS (IPv4) of the instance.
+
+2. **Configure Security Group Rules**:
+   - Ensure that the security group associated with your EC2 instance allows inbound traffic on port 3389 (RDP) from your IP address or a specific IP range.
+   - If necessary, modify the security group rules to allow RDP traffic.
+
+3. **Open Remote Desktop Connection (RDP) Client**:
+   - Launch the Remote Desktop Connection application on your local machine. You can typically find it by searching for "Remote Desktop Connection" in the Start menu (Windows) or Spotlight (macOS).
+
+4. **Enter EC2 Instance Details**:
+   - In the Remote Desktop Connection window, enter the Public IP address or DNS name of your EC2 instance in the "Computer" field.
+   - Click "Connect" to initiate the RDP connection.
+
+5. **Enter Credentials**:
+   - When prompted, enter the username and password for your Windows EC2 instance. These credentials can get by clicking GET PASSWORD of and uploading .Pem file of      key pair EC2 instance.
+
+6. **Establish RDP Connection**:
+   - After entering the correct credentials, click "OK" or "Connect" to establish the RDP connection to your Windows EC2 instance.
+
+7. **Access Your Windows EC2 Instance**:
+   - Once the RDP connection is established, you will have remote access to the desktop environment of your Windows EC2 instance.
+   - follow the below steps to deploy your application.
+### Step 5: Deploy Your Application on IIS of AWS Windows Server
+
+#### Prerequisites:
+- ASP.NET MVC web application project published and ready for deployment.
+- Access to the Windows EC2 instance via Remote Desktop Protocol (RDP), as explained in Step 4.
+- Administrative privileges on the Windows EC2 instance.
+
+#### Instructions:
+1. **Publish Your ASP.NET MVC Web Application**:
+   - In Visual Studio, right-click on your ASP.NET MVC project and select "Publish".
+   - Choose a publish target such as "Folder" or "File System", and specify a directory to publish the application files to.
+   - Click "Publish" to generate the deployment package.
+
+2. **Transfer Application Files to EC2 Instance**:
+   - Now copy Your folder containing your web application And paste that on windows server
+   - Place the files in a directory accessible to IIS, such as the default website directory (e.g., C:\inetpub\wwwroot).
+
+3. **Configure Internet Information Services (IIS)**:
+   - On the Windows EC2 instance, open Internet Information Services (IIS) Manager.
+   - In the Connections pane, expand the server node, then expand Sites.
+   - Right-click on the Default Web Site (or create a new site if desired) and select "Add Application".
+   - Specify an alias for the application and the physical path to the directory containing your application files.
+   - Configure additional settings such as the application pool and binding settings as needed.
+
+4. **Configure Application Pool**:
+   - In IIS Manager, navigate to Application Pools in the Connections pane.
+   - Select the application pool associated with your application.
+   - Ensure that the .NET CLR version and pipeline mode are configured correctly for your ASP.NET application.
+
+5. **Grant Necessary Permissions**:
+   - Ensure that the application pool identity (e.g., IIS AppPool\DefaultAppPool) has sufficient permissions to access the application files and any required       
+     resources.
+   - Grant permissions to the appropriate folders and files as needed.
+
+6. **Test the Application**:
+   - Once the application is deployed and configured in IIS, open a web browser and navigate to the URL of your EC2 instance.
+   - Verify that the application loads successfully and functions as expected.
+
+
+
 
 
 
