@@ -14,7 +14,7 @@ This manual guides how to deploy a **Hello World** web application built with AS
    
 5. **Deploy Your Application on IIS of AWS Windows Server**
 
-6. **Connect to Your EC2 Linux Instance Using PuTTY**
+6. **Connect to Your EC2 Linux Instance Using SSH Client-PuTTY**
 
 7. **Deploy Your Web Application on EC2 Linux Instance**
 ### Step 1: Create an ASP.NET MVC Web Application
@@ -182,8 +182,98 @@ This manual guides how to deploy a **Hello World** web application built with AS
     [HTTP Error](https://youtu.be/XgpfAliJ-nw?si=jtpISmxxI8MosDE1)
    - Verify that the application loads successfully and functions as expected.
 
+### Step 6: Connect to Your EC2 Linux Instance Using SSH Client - PuTTY
 
+#### Prerequisites:
+- Linux EC2 instance launched and running.
+- Public IP address or DNS name of the EC2 instance.
+- PuTTY SSH client installed on your local machine. You can download PuTTY from the [official website](https://www.putty.org/) and follow the installation instructions for your operating system.
 
+#### PuTTY Installation Steps:
+1. **Download PuTTY Installer**:
+   - Visit the [PuTTY download page](https://www.putty.org/) and download the PuTTY installer suitable for your operating system (Windows, macOS, or Linux).
 
+2. **Run PuTTY Installer**:
+   - Once the download is complete, run the PuTTY installer executable.
+   - Follow the installation wizard instructions to install PuTTY on your local machine.
 
+#### Instructions:
+1. **Write Terraform Configuration for Launching Linux Instance**:
+   - Define your AWS provider and region in a Terraform configuration file (e.g., `main.tf`).
+   - Write Terraform code to define the resources you want to provision, such as an EC2 instance with a Linux operating system. Ensure that you specify a key pair       for SSH access.
+   - Refer to the [Terraform documentation](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance) for guidance on configuring EC2         instances.
 
+2. **Initialize Terraform Configuration**:
+   - In your terminal or command prompt, navigate to the directory containing your Terraform configuration file (`main.tf`).
+   - Run `terraform init` to initialize the Terraform configuration. This command downloads any necessary plugins and sets up the directory for use with Terraform.
+
+3. **Preview Terraform Changes**:
+   - After initialization, run `terraform plan` to generate an execution plan. This command shows you what Terraform will do when you apply your configuration.
+   - Review the plan to ensure it aligns with your expectations and makes any necessary adjustments to your Terraform configuration if needed.
+
+4. **Apply Terraform Configuration**:
+   - Once you're satisfied with the plan, apply the Terraform configuration by running `terraform apply`.
+   - Terraform will prompt you to confirm the changes. Enter `yes` to proceed with applying the configuration.
+   - Terraform will provision the resources defined in your configuration, including launching the Linux EC2 instance on AWS.
+
+5. **Retrieve EC2 Instance Public IP Address or DNS Name**:
+   - Log in to your AWS Management Console.
+   - Navigate to the EC2 dashboard and locate your Linux EC2 instance.
+   - Note down the Public IPv4 address or Public DNS (IPv4) of the instance.
+
+6. **Configure PuTTY SSH Client**:
+   - Launch PuTTY SSH client on your local machine.
+   - In the "Session" category on the left, enter the public IP address or DNS name of your Linux EC2 instance in the "Host Name (or IP address)" field.
+   - Ensure that the connection type is set to "SSH" and the port is set to 22 (the default SSH port).
+
+7. **Load Key Pair (if applicable)**:
+   - In the PuTTY configuration window, navigate to the "Connection" > "SSH" > "Auth" category.
+   - Click on the "Browse" button next to "Private key file for authentication" and select the private key file (.pem) associated with your key pair.
+   - Click "Open" to load the key pair.
+
+8. **Connect to EC2 Linux Instance**:
+   - After configuring the PuTTY session settings, click "Open" to establish the SSH connection to your Linux EC2 instance.
+   - If prompted, accept the SSH host key fingerprint to continue connecting.
+   - Log in to the Linux instance using the appropriate username (e.g., `ec2-user` for Amazon Linux) and the private key associated with your key pair.
+
+9. **Access Your EC2 Linux Instance**:
+   - Once the SSH connection is established, you will have command-line access to your Linux EC2 instance.
+   - You can now execute commands, install software, and perform administrative tasks as needed.
+
+### Step 6: Deploy Your Web Application on EC2 Linux Instance
+**Commands to Run ASP.NET MVC Application on EC2 Linux Instance:**
+Once connected to your EC2 Linux instance via PuTTY SSH client, follow these steps to run your ASP.NET MVC application:
+
+1. **Transfer Files to AWS Linux Server using SCP**:
+   -Use the `scp` command to securely copy the application files to the AWS Linux server.
+   -```bash
+   `"scp -i /path/to/your/private/key <local_file_path> ec2-user@<your_server_ip>:/path/to/destination/directory"`.
+   -Replace **/path/to/your/private/key** with the local path to your private key file.
+   -**<local_file_path>** with the path to the ASP.NET MVC application files on your local machine.
+   -**<your_server_ip>** with the public IP address or DNS name of your AWS Linux server.
+   -**/path/to/destination/directory** with the path to the directory on the AWS Linux server where you want to copy the files.
+   - To verify the transfer use this command `cd /path/to/destination/directory` and `ls`.
+   - 
+2. **Navigate to the Directory with Application Files**:
+   - Navigate to the directory where you transferred the ASP.NET MVC application files.
+     ```bash
+     cd /path/to/destination/directory
+     ```
+
+3. **Install .NET Core Runtime (if not already installed)**:
+   - If the .NET Core Runtime is not already installed on the AWS Linux server, follow the instructions provided by Microsoft to [install .NET Core runtime](https://docs.microsoft.com/en-us/dotnet/core/install/) for Linux.
+
+4. **Run the ASP.NET MVC Application**:
+   - Use the `dotnet` command to run your ASP.NET MVC application:
+     ```bash
+     dotnet <your_application.dll>
+     ```
+   - Replace `<your_application.dll>` with the name of your application's .dll file.
+   - For example:
+     ```bash
+     dotnet YourApplication.dll
+     ```
+
+5. **Access Your Application**:
+   - Once the ASP.NET MVC application is running, you can access it using a web browser.
+   - Open a web browser and navigate to the public IP address or DNS name of your AWS Linux server.
