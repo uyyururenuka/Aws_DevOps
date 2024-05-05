@@ -239,7 +239,7 @@ This manual guides how to deploy a **Hello World** web application built with AS
    - Once the SSH connection is established, you will have command-line access to your Linux EC2 instance.
    - You can now execute commands, install software, and perform administrative tasks as needed.
 
-### Step 6: Deploy Your Web Application on EC2 Linux Instance
+### Step 7: Deploy Your Web Application on EC2 Linux Instance
 **Commands to Run ASP.NET MVC Application on EC2 Linux Instance:**
 Once connected to your EC2 Linux instance via PuTTY SSH client, follow these steps to run your ASP.NET MVC application:
 
