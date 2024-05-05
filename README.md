@@ -178,6 +178,8 @@ This manual guides how to deploy a **Hello World** web application built with AS
 
 6. **Test the Application**:
    - Once the application is deployed and configured in IIS, open a web browser and navigate to the URL of your EC2 instance.
+   - If you encounter HTTP Error 500.19-Internal Server Error the refer this[HTTP Error 500.19](https://youtu.be/EatWfAKT078?si=HEfqrzvWthMJizGg) And Then
+    [This](https://youtu.be/XgpfAliJ-nw?si=jtpISmxxI8MosDE1)
    - Verify that the application loads successfully and functions as expected.
 
 
