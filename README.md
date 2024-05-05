@@ -217,7 +217,6 @@ This manual guides how to deploy a **Hello World** web application built with AS
    - Terraform will provision the resources defined in your configuration, including launching the Linux EC2 instance on AWS.
 
 5. **Retrieve EC2 Instance Public IP Address or DNS Name**:
-   - Log in to your AWS Management Console.
    - Navigate to the EC2 dashboard and locate your Linux EC2 instance.
    - Note down the Public IPv4 address or Public DNS (IPv4) of the instance.
 
